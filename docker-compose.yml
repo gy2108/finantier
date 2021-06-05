@@ -1,0 +1,22 @@
+version: '3.8'
+services:
+  main:
+    build:
+      context: main
+      dockerfile: Dockerfile
+    command: 'python main/main.py'
+    container_name: main
+    ports:
+      - 8002:5000
+    volumes:
+      - .:/app
+  encrypt_service:
+    build:
+      context: encrypt
+      dockerfile: Dockerfile
+    command: 'python encrypt/encrypt.py'
+    container_name: encrypt
+    ports:
+      - 8003:5000
+    volumes:
+      - .:/app
