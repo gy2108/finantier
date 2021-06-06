@@ -20,19 +20,19 @@ Clone the repo from -> ```https://github.com/gy2108/finantier.git```
 
 ```docker-compose up```
 
-### Services
-#### 1.  auth
-Endpoint: ```/token/{user_id}```
+## Services
+### 1.  auth
+**Endpoint**: ```/token/{user_id}```
 
-Sample Request: ```http://localhost:8001/token/101```
+**Sample Request**: ```http://localhost:8001/token/101```
 
-Sample Response: ```{
+**Sample Response**: ```{
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDEsImV4cCI6MTYyMjk5OTg1Mn0.Vn3cd158_IrNWOelYQI33eh4odDXWbMW6HIpgzJJ1Rs"
         }```
 
 ```http code: 200```
         
-#### 2. main
+### 2. main
 **Endpoint**: ```/symbol/{symbol}```
 
 **Sample Request**: ```http://localhost:8002/symbol/INFY```
@@ -55,7 +55,7 @@ Sample Response: ```{
 } http code : 403```
 
 
-#### 3. encrypt
+### 3. encrypt
 **Endpoint**: ```/encrypt```, Request Body: Json 
 
 **Sample Request**: ```http://localhost:8003/encrypt```
