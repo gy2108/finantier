@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, json
+from flask import Flask, request, jsonify, json, make_response
 import requests
 import base64
 import hashlib
@@ -46,7 +46,7 @@ def get_encrypt_symbol_data():
     cipher_text = cipher_byte.decode("utf-8")
     # cipher_text = bytes(cipher_text, 'utf-8')
     # print(cipher_obj.decrypt(str(cipher_text)))
-    return jsonify({"cipher_text": cipher_text})
+    return make_response(jsonify({"cipher_text": cipher_text}), 200)
 
 
 if __name__ == '__main__':
