@@ -13,17 +13,15 @@ def home():
 
 @app.route('/symbol/<string:symbol>', methods=['GET'])
 def get_symbol_data(symbol):
-    # resp = requests.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={}&apikey=7KK8XVZ5Y2AF0ZL6".format(symbol))
-    # r = resp.json()
-    # data_points_dict = {}
-    # for key, value in r["Global Quote"].items():
-    #     data_points_dict[key.split(" ")[1]] = value
+    stock_resp = requests.get("https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={}&apikey=7KK8XVZ5Y2AF0ZL6".format(symbol))
+    stock_data = stock_resp.json()
+    data_points_dict = {}
+    for key, value in stock_data["Global Quote"].items():
+        data_points_dict[key.split(" ")[1]] = value
 
-    r = requests.get(url=ENCRYPT_SERVICE_URL, json={"gopal":"sdasda"})
-    print(r.text)
-    print(r.status_code)
-    return jsonify(r.json())
-    # return jsonify(data_points_dict)
+    encrypt_resp = requests.get(url=ENCRYPT_SERVICE_URL, json=data_points_dict)
+
+    return jsonify(encrypt_resp.json())
 
 
 if __name__ == '__main__':
