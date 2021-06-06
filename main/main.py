@@ -23,12 +23,12 @@ def token_required(f):
             token = request.headers['Authorization']
         
         if not token:
-            return jsonify({'message': 'a valid token is missing'})
+            return make_response(jsonify({'message': 'a valid token is missing'}), 403)
         try:
             data = jwt.decode(token.split(" ")[1], app.config['SECRET_KEY'], algorithms='HS256')
         except Exception as e:
             print(e)
-            return jsonify({'message': 'token is invalid'})
+            return make_response(jsonify({'message': 'token is invalid'}), 403)
 
         return f(*args, **kwargs)
     return decorator
