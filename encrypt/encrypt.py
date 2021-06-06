@@ -6,15 +6,13 @@ app = Flask(__name__)
 
 @app.route('/')
 def home():
-    return 'HEy!! Pass data to be encrypted'
+    return 'Encrypt Service !!!'
 
 
 @app.route('/encrypt', methods=['GET'])
 def get_symbol_data():
-    print("$$$$$$$$$$$$$$$$$$$$$$$")
-    # data = request.json
-    # print(data)
-    return jsonify({"gopal":"yadav"})
+    data = request.json
+    return jsonify(data)
 
 
 if __name__ == '__main__':

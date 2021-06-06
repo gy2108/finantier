@@ -4,6 +4,8 @@ import requests
 app = Flask(__name__)
 
 
+ENCRYPT_SERVICE_URL = "http://encrypt_service:5000/encrypt"
+
 @app.route('/')
 def home():
     return 'Hello from Finantier :)'
@@ -16,11 +18,11 @@ def get_symbol_data(symbol):
     # data_points_dict = {}
     # for key, value in r["Global Quote"].items():
     #     data_points_dict[key.split(" ")[1]] = value
-    
-    r = requests.get("https://localhost:5000/encrypt")
+
+    r = requests.get(url=ENCRYPT_SERVICE_URL, json={"gopal":"sdasda"})
     print(r.text)
     print(r.status_code)
-    return r
+    return jsonify(r.json())
     # return jsonify(data_points_dict)
 
 
