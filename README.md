@@ -33,34 +33,34 @@ Sample Response: ```{
 ```http code: 200```
         
 #### 2. main
-Endpoint: ```/symbol/{symbol}```
+**Endpoint**: ```/symbol/{symbol}```
 
-Sample Request: ```http://localhost:8002/symbol/INFY```
+**Sample Request**: ```http://localhost:8002/symbol/INFY```
 
 
-Sample Response: ```{
+**Sample Response**: ```{
     "cipher_text": "gWr2pdc7BAhPlYid27ATTSeiUYdhjzQcMOjbD5FP0RcgNUZqPz6DHHeWPzwq0dLGWmXMA8eiuQ=="
 }   http code : 200```
 
-If rate limit exceeded or error from public API ```{"error_message": "Please try after Some time"} http code: 500```
+**If rate limit exceeded or error from public API** ```{"error_message": "Please try after Some time"} http code: 500```
 
-If symbol is invalid ```{"error_message": "Not a Valid Symbol"} http code : 404```
+**If symbol is invalid**: ```{"error_message": "Not a Valid Symbol"} http code : 404```
 
-If token exired: ```{
+**If token exired**: ```{
     "error_message": "token is invalid"
 }  http code : 403```
 
-If token not passed: ```{
+**If token not passed**: ```{
     "error_message": "a valid token is missing"
 } http code : 403```
 
 
 #### 3. encrypt
-Endpoint: ```/encrypt```, Request Body: Json 
+**Endpoint**: ```/encrypt```, Request Body: Json 
 
-Sample Request: ```http://localhost:8003/encrypt```
+**Sample Request**: ```http://localhost:8003/encrypt```
 
-Request Body : ```{
+**Request Body** : ```{
         "symbol": "IBM",
         "open": "146.0000",
         "high": "147.5500",
@@ -73,15 +73,15 @@ Request Body : ```{
         "change percent": "1.2848%"
     }```
     
-Sample Response: ```{
+**Sample Response**: ```{
     "cipher_text": "/+R7b//f9m/DAnLlDsXxjs+5TRIgb5bwZAGbqyzop0wKB5KOFEZHzcXeD8cE3rW/DdOjP9qHbz8F8SlN2NuVw=="
 } http code : 200```
 
-If token not passed: ```{
+**If token not passed**: ```{
     "error_message": "a valid token is missing"
 } http code : 403```
 
-If token expired: ```{
+**If token expired**: ```{
     "error_message": "token is invalid"
 } http code : 403```
 
