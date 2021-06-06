@@ -1,12 +1,14 @@
-from flask import Flask, jsonify, make_response
+from flask import Flask, jsonify, make_response, request
 import requests
-import jwt
 from functools import wraps
+import jwt
 
 app = Flask(__name__)
 
 
 ENCRYPT_SERVICE_URL = "http://encrypt_service:5000/encrypt"
+app.config['SECRET_KEY'] = 'finantiersecretkey'
+
 
 @app.route('/')
 def home():
@@ -23,16 +25,13 @@ def token_required(f):
         if not token:
             return jsonify({'message': 'a valid token is missing'})
         try:
-            print(token.split(" ")[1])
             data = jwt.decode(token.split(" ")[1], app.config['SECRET_KEY'], algorithms='HS256')
-            print(data)
         except Exception as e:
             print(e)
             return jsonify({'message': 'token is invalid'})
 
         return f(*args, **kwargs)
     return decorator
-
 
 
 @app.route('/symbol/<string:symbol>', methods=['GET'])
@@ -54,9 +53,10 @@ def get_symbol_data(symbol):
     for key, value in stock_data["Global Quote"].items():
         data_points_dict[key.split(" ")[1]] = value
 
-    encrypt_resp = requests.get(url=ENCRYPT_SERVICE_URL, json=data_points_dict, headers={'Authorization': 'Bearer {}'.format(token)})
+    token = request.headers['Authorization']
+    encrypt_resp = requests.get(url=ENCRYPT_SERVICE_URL, json=data_points_dict, headers={'Authorization': '{}'.format(token)})
     if encrypt_resp.status_code == 200:
-        return make_response(jsonify(encrypt_resp.json(), 200))
+        return make_response(jsonify(encrypt_resp.json()), 200)
     else:
         return make_response(jsonify({"error_message": "Please try after some time"}), 500)
 

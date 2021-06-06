@@ -52,7 +52,7 @@ def token_required(f):
         if not token:
             return jsonify({'message': 'a valid token is missing'})
         try:
-            print(token.split(" ")[1])
+            print(token)
             data = jwt.decode(token.split(" ")[1], app.config['SECRET_KEY'], algorithms='HS256')
             print(data)
         except Exception as e:
