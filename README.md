@@ -28,9 +28,7 @@ Clone the repo from -> ```https://github.com/gy2108/finantier.git```
 
 **Sample Response**: ```{
     "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMDEsImV4cCI6MTYyMjk5OTg1Mn0.Vn3cd158_IrNWOelYQI33eh4odDXWbMW6HIpgzJJ1Rs"
-        }```
-
-```http code: 200```
+        }   http code: 200```
         
 ### 2. main
 **Endpoint**: ```/symbol/{symbol}```
@@ -46,7 +44,7 @@ Clone the repo from -> ```https://github.com/gy2108/finantier.git```
 
 **If symbol is invalid**: ```{"error_message": "Not a Valid Symbol"} http code : 404```
 
-**If token exired**: ```{
+**If token expired**: ```{
     "error_message": "token is invalid"
 }  http code : 403```
 
