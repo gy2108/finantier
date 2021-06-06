@@ -4,8 +4,12 @@ import base64
 import hashlib
 from Crypto import Random
 from Crypto.Cipher import AES
+from functools import wraps
+import jwt
 
 app = Flask(__name__)
+
+app.config['SECRET_KEY']='finantiersecretkey'
 
 
 @app.route('/')
@@ -38,7 +42,29 @@ class AESCipher(object):
         return s[:-ord(s[len(s)-1:])]
 
 
+def token_required(f):
+    @wraps(f)
+    def decorator(*args, **kwargs):
+        token = None
+        if 'Authorization' in request.headers:
+            token = request.headers['Authorization']
+        
+        if not token:
+            return jsonify({'message': 'a valid token is missing'})
+        try:
+            print(token.split(" ")[1])
+            data = jwt.decode(token.split(" ")[1], app.config['SECRET_KEY'], algorithms='HS256')
+            print(data)
+        except Exception as e:
+            print(e)
+            return jsonify({'message': 'token is invalid'})
+
+        return f(*args, **kwargs)
+    return decorator
+
+
 @app.route('/encrypt', methods=['GET'])
+@token_required
 def get_encrypt_symbol_data():
     data = request.json
     cipher_obj = AESCipher(key="mysecretpassword")
